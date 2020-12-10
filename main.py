@@ -1,44 +1,34 @@
-import random
-import time
-from tkinter import *
-
-start = time.perf_counter()
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy import stats
 
 
-class Application(Tk):
-    def __init__(self, master=None):
-        Tk.__init__(self, master)
-        self.createWidgets()
+def diff_chi2_dis():
+    """
+    不同参数下的卡方分布
+    :return:
+    """
+    # chi2_dis_0_5 = stats.chi2(df=0.5)
+    chi2_dis_1 = stats.chi2(df=1)
+    chi2_dis_4 = stats.chi2(df=4)
+    chi2_dis_10 = stats.chi2(df=10)
+    chi2_dis_20 = stats.chi2(df=20)
 
-    def createWidgets(self):
-        self.canvas = Canvas(self, width=500, height=500, bg='white')
-        self.canvas.pack()
-        self.canvas.create_rectangle(0, 0, 500, 500, fill="#d9c682")
-        self.canvas.create_oval(2, 2, 498, 498, fill="#d9c682", outline='black')
-
-
-def monteCarlo(N, root):
-    i = 0
-    count = 0
-    while i <= N:
-        x = random.random() * 500
-        y = random.random() * 500
-        if pow(x - 250, 2) + pow(y - 250, 2) < 62500:
-            count += 1
-            root.canvas.create_oval(x, y, x + 5, y + 5, fill="#bf4c03")
-        else:
-            root.canvas.create_oval(x, y, x + 5, y + 5, fill="#6f7976")
-        root.update()
-        i += 1
-    pi = 4 * count / N
-    print("圆周率的值是{:.10f}".format(pi))
-    print("程序运行时间为{}s".format(time.perf_counter() - start))
-    app.mainloop()
+    # x1 = np.linspace(chi2_dis_0_5.ppf(0.01), chi2_dis_0_5.ppf(0.99), 100)
+    x2 = np.linspace(chi2_dis_1.ppf(0.65), chi2_dis_1.ppf(0.9999999), 100)
+    x3 = np.linspace(chi2_dis_4.ppf(0.000001), chi2_dis_4.ppf(0.999999), 100)
+    x4 = np.linspace(chi2_dis_10.ppf(0.000001), chi2_dis_10.ppf(0.99999), 100)
+    x5 = np.linspace(chi2_dis_20.ppf(0.00000001), chi2_dis_20.ppf(0.9999), 100)
+    fig, ax = plt.subplots(1, 1)
+    # ax.plot(x1, chi2_dis_0_5.pdf(x1), 'b-', lw=2, label=r'df = 0.5')
+    ax.plot(x2, chi2_dis_1.pdf(x2), 'g-', lw=2, label='df = 1')
+    ax.plot(x3, chi2_dis_4.pdf(x3), 'r-', lw=2, label='df = 4')
+    ax.plot(x4, chi2_dis_10.pdf(x4), 'b-', lw=2, label='df = 10')
+    ax.plot(x5, chi2_dis_20.pdf(x5), 'y-', lw=2, label='df = 20')
+    plt.ylabel('Probability')
+    plt.title(r'PDF of $\chi^2$ Distribution')
+    ax.legend(loc='best', frameon=False)
+    plt.show()
 
 
-app = Application()
-# 设置窗口标题:
-app.title('蒙特卡洛方法（求圆周率）')
-app.geometry('500x500')
-app.resizable(False, False)
-monteCarlo(10000000, app)
+diff_chi2_dis()
