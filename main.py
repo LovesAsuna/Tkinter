@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter.ttk import *
 
-
 class Application(Tk):
     def __init__(self):
         Tk.__init__(self, None)
@@ -28,7 +27,7 @@ class Application(Tk):
     def verifiy(self):
         num = self.selector.current()
         if num == 0:
-            import Monte_Carlo_method
+            import MonteCarlo_method
         elif num == 1:
             import four_distributions_comparison
         elif num == 2:

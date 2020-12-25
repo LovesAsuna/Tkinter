@@ -18,4 +18,4 @@ def monte_carlo(N):
     print("程序运行时间为{}s".format(time.perf_counter() - start))
 
 
-monte_carlo(10000000)
+monte_carlo(10000)
