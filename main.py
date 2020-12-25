@@ -28,17 +28,17 @@ class Application(Tk):
     def verifiy(self):
         num = self.selector.current()
         if num == 0:
-            import MonteCarlo
+            import Monte_Carlo_method
         elif num == 1:
-            import Poisson
+            import four_distributions_comparison
         elif num == 2:
-            import Cumulative
+            import exponential_distribution
         elif num == 3:
-            import Normal
+            import normal_distribution
         elif num == 4:
-            import Normal2
+            import normal_distribution_2D
         elif num == 5:
-            import Probability
+            import Chi_squared_distribution
         elif num == 6:
             import Sampling
 
