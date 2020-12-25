@@ -1,6 +1,8 @@
 import random
 import time
 from tkinter import *
+from tkinter import messagebox
+from tkinter.simpledialog import askinteger
 
 start = time.perf_counter()
 
@@ -12,12 +14,13 @@ class Application(Tk):
 
     def createWidgets(self):
         self.canvas = Canvas(self, width=500, height=500, bg='white')
-        self.canvas.pack()
         self.canvas.create_rectangle(0, 0, 500, 500, fill="#d9c682")
         self.canvas.create_oval(2, 2, 498, 498, fill="#d9c682", outline='black')
+        self.canvas.pack()
 
 
-def monteCarlo(N, root):
+def monteCarlo(root):
+    N = askinteger("参数:", prompt='输入一个整数，作为模拟次数', initialvalue=10000000, maxvalue=10000000, minvalue=100)
     i = 0
     count = 0
     while i <= N:
@@ -31,9 +34,7 @@ def monteCarlo(N, root):
         root.update()
         i += 1
     pi = 4 * count / N
-    print("圆周率的值是{:.10f}".format(pi))
-    print("程序运行时间为{}s".format(time.perf_counter() - start))
-    app.mainloop()
+    messagebox.showinfo("结果", "程序运行时间为{}s".format(time.perf_counter() - start) + "\n" + "圆周率的值是{:.10f}".format(pi))
 
 
 app = Application()
@@ -41,4 +42,5 @@ app = Application()
 app.title('蒙特卡洛方法（求圆周率）')
 app.geometry('500x500')
 app.resizable(False, False)
-monteCarlo(10000000, app)
+monteCarlo(app)
+app.mainloop()
