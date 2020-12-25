@@ -29,7 +29,7 @@ class Application(Tk):
         if num == 0:
             import MonteCarlo_method
         elif num == 1:
-            import four_distributions_comparison
+            import poisson_distribution
         elif num == 2:
             import exponential_distribution
         elif num == 3:
@@ -39,7 +39,7 @@ class Application(Tk):
         elif num == 5:
             import Chi_squared_distribution
         elif num == 6:
-            import Sampling
+            import four_distributions_comparison
 
 
 app = Application()

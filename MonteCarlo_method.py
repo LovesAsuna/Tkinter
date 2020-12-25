@@ -10,6 +10,8 @@ class Application(Tk):
     def __init__(self, master=None):
         Tk.__init__(self, master)
         self.canvas = Canvas(self, width=500, height=600, bg='white')
+        self.title('蒙特卡洛方法（求圆周率）')
+        self.geometry('500x600')
 
     def create_widgets(self):
         self.canvas.create_rectangle(0, 0, 500, 600, fill="white")
@@ -17,7 +19,7 @@ class Application(Tk):
         self.canvas.pack()
 
 
-def Monte_Carlo(N, root):
+def MonteCarlo(N, root):
     root.create_widgets()
     i = 0
     count = 0
@@ -43,12 +45,10 @@ def ask_integer():
 
 def startApp():
     i = ask_integer()
-    Monte_Carlo(i, app)
+    MonteCarlo(i, app)
 
 
 app = Application()
-app.title('蒙特卡洛方法（求圆周率）')
-app.geometry('500x600')
 
 # 菜单
 menubar = Menu(app)
