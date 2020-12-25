@@ -4,49 +4,6 @@ from scipy import stats
 from tkinter import *
 
 
-class Application(Tk):
-    def __init__(self):
-        self.m = 4
-        self.n = 8
-        self.p = 50
-        Tk.__init__(self, None)
-        self.createWidgets()
-        self.geometry("475x25")
-        self.title("泊松定理")
-
-    def createWidgets(self):
-        # 参数λ
-        self.label1 = Label(master=self, text="λ: ")
-        self.label1.pack(side=LEFT)
-        self.entry1 = Entry(width=15)
-        self.entry1.pack(side=LEFT)
-        # 参数n
-        self.label2 = Label(master=self, text="n: ")
-        self.label2.pack(side=LEFT)
-        self.entry2 = Entry(width=15)
-        self.entry2.pack(side=LEFT)
-        # 参数p
-        self.label3 = Label(master=self, text="p: ")
-        self.label3.pack(side=LEFT)
-        self.entry3 = Entry(width=15)
-        self.entry3.pack(side=LEFT)
-        # 空格
-        self.label4 = Label(master=self, text="  ")
-        self.label4.pack(side=LEFT)
-        self.button = Button(master=self, text="运算", width=7, command=self.verifiy)
-        self.button.pack(side=LEFT)
-
-    def verifiy(self):
-        self.m = float(self.entry1.get() or self.m)
-        self.n = float(self.entry2.get() or self.n)
-        self.p = float(self.entry3.get() or self.p)
-        self.destroy()
-
-
-app = Application()
-app.mainloop()
-
-
 def compare_binom_poisson(mu=4, n1=8, n2=50):
     """
     二项分布与泊松分布的比较
@@ -91,4 +48,45 @@ def compare_binom_poisson(mu=4, n1=8, n2=50):
     plt.show()
 
 
-compare_binom_poisson(app.m, app.n, app.p)
+class Application(Tk):
+    def __init__(self):
+        self.m = 4
+        self.n = 8
+        self.p = 50
+        Tk.__init__(self, None)
+        self.createWidgets()
+        self.geometry("475x25")
+        self.title("泊松定理")
+
+    def createWidgets(self):
+        # 参数λ
+        self.label1 = Label(master=self, text="λ: ")
+        self.label1.pack(side=LEFT)
+        self.entry1 = Entry(master=self, width=15)
+        self.entry1.pack(side=LEFT)
+        # 参数n
+        self.label2 = Label(master=self, text="n: ")
+        self.label2.pack(side=LEFT)
+        self.entry2 = Entry(master=self, width=15)
+        self.entry2.pack(side=LEFT)
+        # 参数p
+        self.label3 = Label(master=self, text="p: ")
+        self.label3.pack(side=LEFT)
+        self.entry3 = Entry(master=self, width=15)
+        self.entry3.pack(side=LEFT)
+        # 空格
+        self.label4 = Label(master=self, text="  ")
+        self.label4.pack(side=LEFT)
+        self.button = Button(master=self, text="运算", width=7, command=self.verifiy)
+        self.button.pack(side=LEFT)
+
+    def verifiy(self):
+        self.m = float(self.entry1.get() or self.m)
+        self.n = float(self.entry2.get() or self.n)
+        self.p = float(self.entry3.get() or self.p)
+        compare_binom_poisson(app.m, app.n, app.p)
+        self.destroy()
+
+
+app = Application()
+app.mainloop()
