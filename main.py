@@ -10,7 +10,7 @@ class Application(Tk):
         self.title("主窗体")
 
     def createWidgets(self):
-        self.selector = Combobox(self)
+        self.selector = Combobox(self, state="readonly")
         self.selector['value'] = (
             '蒙特卡洛方法（求圆周率）',
             '泊松定理',
